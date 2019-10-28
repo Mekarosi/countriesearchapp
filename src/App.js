@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Countries from './components/Countries';
 
 function App() {
   return (
@@ -10,6 +11,11 @@ function App() {
           Select a country from the dropdown list or make a search.{' '}
         </h1>
       </header>
+      <div className='container'>
+        <div>
+          <Countries />
+        </div>
+      </div>
     </div>
   );
 }
