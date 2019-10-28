@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 export const DropBox = ({ names = [], handleChange }) => {
-  loadNames = names => {
+  const loadNames = names => {
     return names.map(name => (
       <option className='select-items' key={name}>
         {name}

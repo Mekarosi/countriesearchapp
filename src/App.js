@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Countries from './components/Countries';
+import Countries from './components/countries';
 
 function App() {
   return (

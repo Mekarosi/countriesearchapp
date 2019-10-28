@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { DropBox } from './dropBox';
 
 const END_POINTS = {
   ALL_COUNTRIES_API: 'https://restcountries.eu/rest/v2/all',
@@ -28,8 +29,28 @@ class Countries extends Component {
       return [];
     }
   }
+
+  handleChange = ev => {
+    const selectedCountry = ev.target.value;
+
+    const response = this.getData(
+      `${END_POINTS.SEARCH_BY_NAME_API}${selectedCountry}`
+    );
+
+    response.then(countries =>
+      this.setState((prevState, props) => ({
+        countries: countries.data
+      }))
+    );
+  };
+
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <h3>Select a country.</h3>
+        <DropBox handleChange={this.handleChange} names={this.state.names} />
+      </div>
+    );
   }
 }
 
