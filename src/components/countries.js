@@ -3,6 +3,7 @@ import axios from 'axios';
 import { DropBox } from './dropBox';
 import { Search } from './search';
 import { CustomButton } from './customButton';
+import { DetailsDisplay } from './detailsDisplay';
 
 const END_POINTS = {
   ALL_COUNTRIES_API: 'https://restcountries.eu/rest/v2/all',
@@ -130,6 +131,8 @@ class Countries extends Component {
 
           <CustomButton handleClick={this.handleClick} />
         </div>
+        <h3>Get countries here.</h3>
+        <DetailsDisplay countries={this.getCountriesByNumber(10)} />
       </div>
     );
   }
