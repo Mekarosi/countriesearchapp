@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { DropBox } from './dropBox';
+import { Search } from './search';
+import { CustomButton } from './customButton';
 
 const END_POINTS = {
   ALL_COUNTRIES_API: 'https://restcountries.eu/rest/v2/all',
@@ -29,9 +31,9 @@ class Countries extends Component {
       return [];
     }
   }
-  // Event for dropBox
-  handleChange = ev => {
-    const selectedCountry = ev.target.value;
+  // Event handling for dropBox
+  handleChange = event => {
+    const selectedCountry = event.target.value;
 
     const response = this.getData(
       `${END_POINTS.SEARCH_BY_NAME_API}${selectedCountry}`
@@ -44,12 +46,12 @@ class Countries extends Component {
     );
   };
 
-  // Event for search input change
+  // Event handling for search input
   handleKeyUp = event => {
     const searchString = event.target.value;
   };
 
-  searchCountryArray = () => {
+  searchCountriesArray = () => {
     const countriesArray = this.state.searchString.split(',');
     let promises = [];
     const that = this;
@@ -70,11 +72,64 @@ class Countries extends Component {
       .catch(err => console.log('error: ', err));
   };
 
+  // Event handle for button click
+  handleClick = event => {
+    // Get value from input
+    const searchInput = document.getElementById('search').value;
+
+    this.setState((prevState, props) => ({
+      searchString: searchInput
+    }));
+
+    // Loop through the search String array and request server for countries
+    setTimeout(() => {
+      this.SearchCountriesArray.apply(this);
+    }, 0);
+
+    this.getData();
+  };
+
+  //Get name from country and update state
+  getName() {
+    const names = this.state.countries.map(country => country.name);
+    this.setState((prevState, props) => ({ names }));
+  }
+
+  //Return n countries
+  getCountriesByNumber(n) {
+    return this.state.countries.slice(0, 10);
+  }
+
+  componentDidMount() {
+    let initPromise = this.getData(END_POINTS.ALL_COUNTRIES_API);
+
+    let names;
+    initPromise.then(
+      countries => (
+        (names = countries.data.map(country => country.name)),
+        this.setState((prevState, props) => ({
+          countries: countries.data,
+          names
+        }))
+      )
+    );
+  }
+
   render() {
     return (
       <div>
-        <h3>Select a country.</h3>
-        <DropBox handleChange={this.handleChange} names={this.state.names} />
+        <div>
+          <h3>Select a country.</h3>
+          <DropBox handleChange={this.handleChange} names={this.state.names} />
+        </div>
+
+        <div className='search-block'>
+          <h3>Or search country1,country2,country3.</h3>
+
+          <Search handleKeyUp={this.handleKeyUp} />
+
+          <CustomButton handleClick={this.handleClick} />
+        </div>
       </div>
     );
   }
