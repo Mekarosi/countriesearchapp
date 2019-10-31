@@ -84,7 +84,7 @@ class Countries extends Component {
 
     // Loop through the search String array and request server for countries
     setTimeout(() => {
-      this.SearchCountriesArray.apply(this);
+      this.searchCountriesArray.apply(this);
     }, 0);
 
     this.getData();
