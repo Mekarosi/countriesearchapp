@@ -7,7 +7,7 @@ export const Search = ({ handleKepUp }) => {
       id='search'
       className='search'
       onKeyUp={handleKepUp}
-      placeholder='add country names with commas'
+      placeholder='Input country name'
       type='text'
     />
   );

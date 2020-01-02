@@ -120,18 +120,26 @@ class Countries extends Component {
     return (
       <div>
         <div>
+          <br></br>
           <h3>Select a country.</h3>
+          <br></br>
           <DropBox handleChange={this.handleChange} names={this.state.names} />
         </div>
+        <br></br>
 
         <div className='search-block'>
-          <h3>Or search country1,country2,country3.</h3>
+          <h3>Or input country name and search</h3>
+          <br></br>
 
           <Search handleKeyUp={this.handleKeyUp} />
 
           <CustomButton handleClick={this.handleClick} />
         </div>
-        <h3>Get countries here.</h3>
+        <br></br>
+
+        <h3>Get countries details here.</h3>
+
+        <br></br>
         <DetailsDisplay countries={this.getCountriesByNumber(10)} />
       </div>
     );
